@@ -4,33 +4,35 @@ import AddContact from './components/AddContact/AddContact';
 import ContactList from './components/ContactList/ContactList';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import ContactDetail from './components/ContactDetail/ContactDetail';
-import axios from 'axios';
+import getContactsService from './services/getContactsService';
+import deleteContactsService from './services/deleteContactsService';
+import addContactsService from './services/addContactsService';
 function App() {
   const [contacts, setContacts] = useState([]);
-  const addContactHandler = (contact) => {
-    // console.log(contact);
-    setContacts([
-      ...contacts,
-      { id: Math.ceil(Math.random() * 100), ...contact },
-    ]);
+  const addContactHandler = async (contact) => {
+    try {
+      const { data } = await addContactsService(contact);
+      setContacts([...contacts, data]);
+      // setContacts(data);
+    } catch (error) {}
   };
-  const deleteHandler = (id) => {
-    // console.log('click');
-    const filteredContacts = contacts.filter((c) => c.id !== id);
-    setContacts(filteredContacts);
+  const deleteHandler = async (id) => {
+    try {
+      await deleteContactsService(id);
+      const filteredContacts = contacts.filter((c) => c.id !== id);
+      setContacts(filteredContacts);
+    } catch (error) {}
   };
   useEffect(() => {
-    // const savedContacts = JSON.parse(localStorage.getItem('contacts'));
-    // if (savedContacts) setContacts(savedContacts);
     const getContacts = async () => {
-      const { data } = await axios.get('http://localhost:3001/contacts');
+      const { data } = await getContactsService();
       setContacts(data);
     };
-    getContacts();
+    try {
+      getContacts();
+    } catch (error) {}
   }, []);
-  useEffect(() => {
-    localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts]);
+
   return (
     <Router>
       <main className="App">

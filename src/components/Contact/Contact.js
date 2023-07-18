@@ -8,10 +8,13 @@ const Contact = ({ contact, onDelete }) => {
     <div className="item" key={id}>
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <img src={userImage} alt="user" />
-        <Link to={{ pathname: `user/${id}`, state: { contact: contact } }}>
+        <Link
+          to={{ pathname: `user/${id}`, state: { contact: contact } }}
+          className="itemContacts"
+        >
           <div>
-            <p>name:{name}</p>
-            <p>email:{email}</p>
+            <p>name: {name}</p>
+            <p>email: {email}</p>
           </div>
         </Link>
       </div>

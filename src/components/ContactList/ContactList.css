@@ -27,6 +27,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  text-align: start;
   min-width: 25rem;
   padding: 5px;
   border: 1px solid #ccc;
@@ -47,4 +48,11 @@
   width: 20px;
   height: 20px;
   margin-right: 8px;
+}
+
+.itemContacts {
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 500;
+  color: #000;
 }

@@ -1,13 +1,33 @@
+.listWrapper {
+  display: flex;
+  justify-content: center;
+}
+
 .contactList {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+.contactHeader {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+.contactHeader button {
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  color: #fff;
+  padding: 6px 20px;
+  outline: none;
+  background-color: #7c3aed;
+}
 .item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 20rem;
+  min-width: 25rem;
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 5px;

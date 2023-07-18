@@ -3,6 +3,7 @@ import './App.css';
 import AddContact from './components/AddContact/AddContact';
 import ContactList from './components/ContactList/ContactList';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
+import ContactDetail from './components/ContactDetail/ContactDetail';
 function App() {
   const [contacts, setContacts] = useState([]);
   const addContactHandler = (contact) => {
@@ -29,6 +30,7 @@ function App() {
       <main className="App">
         <h1>Contact App</h1>
         <Switch>
+          <Route path="/user/:id" component={ContactDetail} />
           <Route
             path="/add"
             render={(props) => (

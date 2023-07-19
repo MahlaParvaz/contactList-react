@@ -6,6 +6,8 @@ import getContactsService from '../../services/getContactsService';
 import deleteContactsService from '../../services/deleteContactsService';
 const ContactList = ({ onDelete }) => {
   const [contacts, setContacts] = useState(null);
+  const [searchItem, setSearchItem] = useState('');
+  // const [searchResult, setSearchResult] = useState(null);
   const deleteHandler = async (id) => {
     try {
       await deleteContactsService(id);
@@ -22,7 +24,17 @@ const ContactList = ({ onDelete }) => {
       getContacts();
     } catch (error) {}
   }, []);
-
+  const searchHandler = (e) => {
+    setSearchItem(e.target.value);
+    const search = e.target.value;
+    const searchItems = contacts.filter((c) => {
+      return Object.values(c)
+        .join('')
+        .toLowerCase()
+        .includes(search.toLowerCase());
+    });
+    setContacts(searchItems);
+  };
   return (
     <section className="listWrapper">
       <div className="contactList">
@@ -31,6 +43,9 @@ const ContactList = ({ onDelete }) => {
           <Link to="/add">
             <button>Add</button>
           </Link>
+        </div>
+        <div>
+          <input type="text" onChange={searchHandler} value={searchItem} />
         </div>
         {contacts ? (
           contacts.map((contact) => {

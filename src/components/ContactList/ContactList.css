@@ -64,3 +64,26 @@
   color: #7c3aed;
   background-color: #fff;
 }
+.searchBox {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 15rem;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.searchBox input {
+  outline: none;
+  border: none;
+  padding: 6px 10px;
+  width: 100%;
+}
+.searchBox .searchIcon {
+  background-color: #7c3aed;
+  color: #fff;
+  width: 35px;
+  height: 30px;
+  padding: 6px;
+  border-radius: 0px 5px 5px 0px;
+}

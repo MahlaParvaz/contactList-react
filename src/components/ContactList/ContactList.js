@@ -4,10 +4,11 @@ import Contact from '../Contact/Contact';
 import { useEffect, useState } from 'react';
 import getContactsService from '../../services/getContactsService';
 import deleteContactsService from '../../services/deleteContactsService';
+import { FaSearch } from 'react-icons/fa';
 const ContactList = ({ onDelete }) => {
   const [contacts, setContacts] = useState(null);
   const [searchItem, setSearchItem] = useState('');
-  // const [searchResult, setSearchResult] = useState(null);
+  const [allContacts, setAllContacts] = useState(null);
   const deleteHandler = async (id) => {
     try {
       await deleteContactsService(id);
@@ -19,6 +20,7 @@ const ContactList = ({ onDelete }) => {
     const getContacts = async () => {
       const { data } = await getContactsService();
       setContacts(data);
+      setAllContacts(data);
     };
     try {
       getContacts();
@@ -27,13 +29,17 @@ const ContactList = ({ onDelete }) => {
   const searchHandler = (e) => {
     setSearchItem(e.target.value);
     const search = e.target.value;
-    const searchItems = contacts.filter((c) => {
-      return Object.values(c)
-        .join('')
-        .toLowerCase()
-        .includes(search.toLowerCase());
-    });
-    setContacts(searchItems);
+    if (search !== '') {
+      const searchItems = allContacts.filter((c) => {
+        return Object.values(c)
+          .join('')
+          .toLowerCase()
+          .includes(search.toLowerCase());
+      });
+      setContacts(searchItems);
+    } else {
+      setContacts(allContacts);
+    }
   };
   return (
     <section className="listWrapper">
@@ -44,8 +50,9 @@ const ContactList = ({ onDelete }) => {
             <button>Add</button>
           </Link>
         </div>
-        <div>
+        <div className="searchBox">
           <input type="text" onChange={searchHandler} value={searchItem} />
+          <FaSearch className="searchIcon" />
         </div>
         {contacts ? (
           contacts.map((contact) => {

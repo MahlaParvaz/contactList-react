@@ -28,14 +28,15 @@
   align-items: center;
   justify-content: space-between;
   text-align: start;
-  min-width: 25rem;
+  min-width: 30rem;
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 5px;
   margin-top: 20px;
   background-color: #fff;
 }
-.item button {
+.item .deleteBtn,
+.item .editBtn {
   border-radius: 5px;
   border: 1px solid #dc2626;
   cursor: pointer;
@@ -43,11 +44,13 @@
   padding: 5px 10px;
   outline: none;
   background-color: #fff;
+  margin-right: 10px;
 }
 .item img {
   width: 20px;
   height: 20px;
-  margin-right: 8px;
+  margin-right: 15px;
+  margin-left: 8px;
 }
 
 .itemContacts {
@@ -55,4 +58,9 @@
   font-size: 18px;
   font-weight: 500;
   color: #000;
+}
+.item .editBtn {
+  border: 1px solid #7c3aed;
+  color: #7c3aed;
+  background-color: #fff;
 }

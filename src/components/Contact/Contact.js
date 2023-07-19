@@ -5,7 +5,7 @@ const Contact = ({ contact, onDelete }) => {
   const { name, email, id } = contact;
 
   return (
-    <div className="item" key={id}>
+    <div key={id} className="item">
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <img src={userImage} alt="user" />
         <Link
@@ -18,7 +18,14 @@ const Contact = ({ contact, onDelete }) => {
           </div>
         </Link>
       </div>
-      <button onClick={() => onDelete(contact.id)}>delete</button>
+      <div>
+        <Link to={`/edit/${id}`}>
+          <button className="editBtn">Edit</button>
+        </Link>
+        <button className="deleteBtn" onClick={() => onDelete(contact.id)}>
+          delete
+        </button>
+      </div>
     </div>
   );
 };

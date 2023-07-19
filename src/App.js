@@ -7,6 +7,7 @@ import ContactDetail from './components/ContactDetail/ContactDetail';
 import getContactsService from './services/getContactsService';
 import deleteContactsService from './services/deleteContactsService';
 import addContactsService from './services/addContactsService';
+import EditContact from './components/EditContact/EditContact';
 function App() {
   const [contacts, setContacts] = useState([]);
   const addContactHandler = async (contact) => {
@@ -23,6 +24,7 @@ function App() {
       setContacts(filteredContacts);
     } catch (error) {}
   };
+
   useEffect(() => {
     const getContacts = async () => {
       const { data } = await getContactsService();
@@ -38,6 +40,7 @@ function App() {
       <main className="App">
         <h1>Contact App</h1>
         <Switch>
+          <Route path="/edit/:id" component={EditContact} />
           <Route path="/user/:id" component={ContactDetail} />
           <Route
             path="/add"
@@ -57,8 +60,6 @@ function App() {
             )}
           />
         </Switch>
-        {/* // <AddContact addContactHandler={addContactHandler} />
-      // <ContactList contacts={contacts} onDelete={deleteHandler} /> */}
       </main>
     </Router>
   );

@@ -12,7 +12,9 @@ const ContactList = ({ contacts, onDelete }) => {
           </Link>
         </div>
         {contacts.map((contact) => {
-          return <Contact contact={contact} onDelete={onDelete} />;
+          return (
+            <Contact key={contact.id} contact={contact} onDelete={onDelete} />
+          );
         })}
       </div>
     </section>

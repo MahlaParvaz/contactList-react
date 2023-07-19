@@ -1,19 +1,25 @@
 import { useState } from 'react';
+import addContactsService from '../../services/addContactsService';
 import './AddContact.css';
-const AddContact = ({ addContactHandler, history }) => {
+const AddContact = ({ history }) => {
   const [contact, setContact] = useState({ name: '', email: '' });
+
   const changeHandler = (e) => {
     setContact({ ...contact, [e.target.name]: e.target.value });
   };
-  const submitForm = (e) => {
+  const submitForm = async (e) => {
     if (!contact.name || !contact.email) {
       alert('all filds are mantory');
       return;
     }
     e.preventDefault();
-    addContactHandler(contact);
-    setContact({ name: '', email: '' });
-    history.push('/');
+    try {
+      await addContactsService(contact);
+      setContact({ name: '', email: '' });
+      history.push('/');
+      // setContacts(data);
+    } catch (error) {}
+    // addContactHandler(contact);
   };
   return (
     <form onSubmit={submitForm}>
